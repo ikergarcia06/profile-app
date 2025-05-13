@@ -8,16 +8,19 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+// Middleware para parsear JSON
 app.use(bodyParser.json());
 
-// Página raíz
+// Ruta raíz
 app.get('/', (req, res) => {
     res.send('Inicio del sistema de perfiles');
 });
 
-// Rutas de la app
+// Rutas del panel
 app.use('/panel', profileRoutes);
 
-app.listen(3000, () => {
-    console.log('Servidor activo en el puerto 3000');
+// Puerto dinámico para Railway o 3000 local
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor activo en el puerto ${PORT}`);
 });
